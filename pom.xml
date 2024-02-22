@@ -9,7 +9,6 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>17</maven.compiler.release>
-    <io.hotmoka.annotations.version>1.4.1</io.hotmoka.annotations.version>
   </properties>
 
   <organization>
@@ -33,10 +32,10 @@
   <developers>
     <developer>
       <name>Fausto Spoto</name>
-	  <email>fausto.spoto@hotmoka.io</email>
-	  <organization>Hotmoka</organization>
-	  <organizationUrl>https://www.hotmoka.io</organizationUrl>
-	  <timezone>UTC+01:00</timezone>
+      <email>fausto.spoto@hotmoka.io</email>
+      <organization>Hotmoka</organization>
+      <organizationUrl>https://www.hotmoka.io</organizationUrl>
+      <timezone>UTC+01:00</timezone>
     </developer>
   </developers>
   
@@ -103,7 +102,7 @@
             <goals>deploy</goals>
           </configuration>
         </plugin>
-	    <plugin>
+        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-gpg-plugin</artifactId>
           <version>3.1.0</version>
@@ -116,14 +115,14 @@
             </goals>
             </execution>
           </executions>
-	    </plugin>
+        </plugin>
       </plugins>
     </pluginManagement>
   </build>
 
   <profiles>
-	<profile>
-	  <id>release</id>
+    <profile>
+      <id>release</id>
       <build>
         <plugins>
           <!-- the artifacts get signed -->
