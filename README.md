@@ -1,5 +1,5 @@
-[![Java-Build Action Status](https://github.com/Hotmoka/io.hotmoka.annotations/actions/workflows/java_build.yml/badge.svg)](https://github.com/Hotmoka/io.hotmoka.annotations/actions)
-[![Maven Central](https://img.shields.io/maven-central/v/io.hotmoka.annotations/io.hotmoka.annotations.svg?label=Maven%20Central)](https://central.sonatype.com/search?smo=true&q=g:io.hotmoka.annotations)
+[![Java-Build Action Status](https://github.com/Hotmoka/io-hotmoka-annotations/actions/workflows/java_build.yml/badge.svg)](https://github.com/Hotmoka/io-hotmoka-annotations/actions)
+[![Maven Central](https://img.shields.io/maven-central/v/io.hotmoka.annotations/io-hotmoka-annotations.svg?label=Maven%20Central)](https://central.sonatype.com/search?smo=true&q=g:io.hotmoka.annotations)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 # Basic annotations in Java
