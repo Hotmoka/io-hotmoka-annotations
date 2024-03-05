@@ -13,21 +13,29 @@ Compilation of selected modules, sign with the given key and deploy to Maven Cen
 
 By using the maven-flatten-plugin, this pom.xml allows us to use properties to define
 the versions of the artifacts: the properties will be replaced by their value in the deployed artifacts.
+Moreover, this makes the parent pom useless, hence it is not deployed.
+Note: submodules whose artifact must be deployed on Maven Central must activate the Nexus staging plugin
+(see for instance the pom.xml of the io-hotmoka-annotations submodule).
 
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <groupId>io.hotmoka.annotations</groupId>
-  <artifactId>io-hotmoka-annotations</artifactId>
-  <version>1.4.1</version>
-  <packaging>jar</packaging>
+  <modelVersion>4.0.0</modelVersion>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>17</maven.compiler.release>
+    <io.hotmoka.annotations.version>1.4.1</io.hotmoka.annotations.version>
   </properties>
+
+  <groupId>io.hotmoka</groupId>
+  <artifactId>io-hotmoka-annotations-parent</artifactId>
+  <packaging>pom</packaging>
+  <version>parent</version>
+  <name>io-hotmoka-annotations</name>
+  <description>This project defines basic annotations.</description>
+  <url>https://github.com/Hotmoka/io-hotmoka-annotations</url>
 
   <organization>
     <url>https://www.hotmoka.io</url>
@@ -36,59 +44,74 @@ the versions of the artifacts: the properties will be replaced by their value in
 
   <inceptionYear>2019</inceptionYear>
 
-  <name>io-hotmoka-annotations</name>
-  <url>https://github.com/Hotmoka/io-hotmoka-annotations</url>
-  <description>This modules defines some basic annotations.</description>
-  
   <licenses>
     <license>
       <name>The Apache License, Version 2.0</name>
       <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
     </license>
   </licenses>
-  
+
   <developers>
     <developer>
       <name>Fausto Spoto</name>
-      <email>fausto.spoto@hotmoka.io</email>
-      <organization>Hotmoka</organization>
-      <organizationUrl>https://www.hotmoka.io</organizationUrl>
-      <timezone>UTC+01:00</timezone>
+	  <email>fausto.spoto@hotmoka.io</email>
+	  <organization>Hotmoka</organization>
+	  <organizationUrl>https://www.hotmoka.io</organizationUrl>
+	  <timezone>UTC+01:00</timezone>
     </developer>
   </developers>
-  
+
   <scm>
     <connection>scm:git:git://github.com/Hotmoka/io-hotmoka-annotations.git</connection>
     <developerConnection>scm:git:git@github.com:Hotmoka/io-hotmoka-annotations.git</developerConnection>
     <url>https://github.com/Hotmoka/io-hotmoka-annotations</url>
     <tag>HEAD</tag>
   </scm>
-  
+
   <distributionManagement>
     <snapshotRepository>
       <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
     <repository>
       <id>ossrh</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
   </distributionManagement>
 
- <build>
+  <!-- specific profiles might add more modules to these -->
+  <modules>
+	<module>io-hotmoka-annotations</module>
+  </modules>
+
+  <!-- typical dependencies if submodules use JUnit 5 -->
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.9.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.9.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>5.3.0</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.11.0</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>3.3.0</version>
-        <configuration>
-          <outputDirectory>../modules/explicit</outputDirectory>
-        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -204,7 +227,7 @@ the versions of the artifacts: the properties will be replaced by their value in
               <serverId>ossrh</serverId>
               <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
               <autoReleaseAfterClose>true</autoReleaseAfterClose>
-              <skipNexusStagingDeployMojo>false</skipNexusStagingDeployMojo>
+              <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
             </configuration>
           </plugin>
         </plugins>
@@ -215,10 +238,10 @@ the versions of the artifacts: the properties will be replaced by their value in
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
+      <modules>
+        <module>io-hotmoka-annotations</module>
+      </modules>
     </profile>
   </profiles>
 
-  <dependencies>
-  </dependencies>
-  
 </project>
