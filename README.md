@@ -6,6 +6,6 @@
 
 This project is a minimal container of annotations, mostly related to concurrency.
 
-<p align="center"><img width="100" src="pics/CC_license.png" alt="This documentation is licensed under a Creative Commons Attribution 4.0 International License"></p><p align="center">This document is licensed under a Creative Commons Attribution 4.0 International License.</p>
+<p align="center"><img width="100" src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" alt="This documentation is licensed under a Creative Commons Attribution 4.0 International License"></p><p align="center">This document is licensed under a Creative Commons Attribution 4.0 International License.</p>
 
 <p align="center">Copyright 2019 by Fausto Spoto (fausto.spoto@hotmoka.io)</p>
